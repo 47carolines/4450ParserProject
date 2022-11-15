@@ -1,7 +1,5 @@
 grammar python;
 
-start: (expr NEWLINE)* ;
-
 // TOKENS
 INT : 'int';
 FLOAT : 'float';
@@ -23,10 +21,30 @@ EXPONENTEQUAL : '**=';
 FLOORDIV : '//';
 FLOORDIVEQUAL : '//=';
 
+SPACE : ' ';
+TAB : '    ';
+
 VARNAME: [a-zA-Z_] [a-zA-Z_0-9]*;
 
 
 // RULES
+start: block EOF;
+
+block
+    : expr block*
+    ;
+
+space
+    : SPACE
+    | TAB
+    | space space
+    ;
+
+expr
+     :
+     | //being worked on 
+     ;
+
 var : INT
     | MINUS INT
     | intCast
@@ -38,15 +56,3 @@ var : INT
     | BOOL
     | VARNAME
     ;
-
-expr : expr ('*' | '/') expr
-     | expr ('+' | '-') expr
-     | INT
-     | '(' expr ')'
-     | printRule
-     ;
-
-printRule: 'print(' expr ')';
-
-NEWLINE: [\n]+ ;
-INT    : [0-9]+ ;
