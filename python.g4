@@ -59,6 +59,7 @@ space
 
 expr
      : var
+     | conditionalExpr
      ;
 
 assignment
@@ -75,20 +76,16 @@ var : INT
     | VARNAME
     ;
 
-expression : mathExpr
-           | conditionalExpr
-           | var
-           ;
-
 conditionalExpr : operator=(GREATERTHAN | GREATERTHANEQUAL) var
-                | whitespace operator=(GREATERTHAN | GREATERTHANEQUAL) var
-                | whitespace operator=(GREATERTHAN | GREATERTHANEQUAL) whitespace var
+                | space operator=(GREATERTHAN | GREATERTHANEQUAL) var
+                | space operator=(GREATERTHAN | GREATERTHANEQUAL) space var
                 | operator=(LESSTHAN | LESSTHANEQUAL) var
-                | whitespace operator=(LESSTHAN | LESSTHANEQUAL) var
-                | whitespace operator=(LESSTHAN | LESSTHANEQUAL) whitespace var
+                | space operator=(LESSTHAN | LESSTHANEQUAL) var
+                | space operator=(LESSTHAN | LESSTHANEQUAL) space var
                 | operator=(AREEQUAL | NOTEQUAL) var
-                | whitespace operator=(AREEQUAL | NOTEQUAL) var
-                | whitespace operator=(AREEQUAL | NOTEQUAL) whitespace var
+                | space operator=(AREEQUAL | NOTEQUAL) var
+                | space operator=(AREEQUAL | NOTEQUAL) space var
                 | operator=(NOT | AND | OR) var
-                | whitespace operator=(NOT | AND | OR) var
-                | whitespace operator=(NOT | AND | OR) whitespace var
+                | space operator=(NOT | AND | OR) var
+                | space operator=(NOT | AND | OR) space var
+                ;
