@@ -51,6 +51,7 @@ block
 expr
      : var
      | conditionalExpr
+     | mathExpr
      ;
 
 assignment
@@ -63,6 +64,12 @@ var
     | BOOL
     | VARNAME
     ;
+
+mathExpr
+    : INT (PLUS | MINUS | MULTIPLY | DIVIDE | MODULUS) INT
+    | VARNAME (PLUSEQUAL | MINUSEQUAL | MULTIPLYEQUAL | DIVIDEEQUAL | MODULUSEQUAL) INT
+    ;
+
 
 conditionalExpr
     : (GREATERTHAN
