@@ -3,10 +3,8 @@ grammar python;
 // TOKENS
 
 //variables
-INT : 'int';
-FLOAT : 'float';
-BOOL : 'bool';
-STRING : 'str';
+INT : '0'..'9'+;
+BOOL : 'true' | 'false';
 STRING : '"' (~["\r\n] | '""')* '"';
 
 VARNAME: [a-zA-Z_] [a-zA-Z_0-9]*;
@@ -27,6 +25,11 @@ EXPONENTEQUAL : '**=';
 FLOORDIV : '//';
 FLOORDIVEQUAL : '//=';
 EQUAL : '=';
+NEWLINE: [\n]+ ;
+
+SPACE : ' ';
+TAB : '    ';
+
 
 //conditional operators
 GREATERTHAN : '>';
@@ -40,10 +43,33 @@ AND : 'and';
 OR : 'or';
 
 // RULES
+start: block EOF;
+
+block
+    : assignment block*
+    | expr block*
+    | NEWLINE
+    ;
+
+space
+    : SPACE
+    | TAB // rule also covers multiple spaces or tabs.
+    | space space
+    ;
+
+expr
+     : var
+     ;
+
+assignment
+    : VARNAME EQUAL expr
+    | VARNAME space EQUAL expr
+    | VARNAME space EQUAL space expr
+    | VARNAME EQUAL space expr
+    ;
+
+
 var : INT
-    | MINUS INT
-    | FLOAT
-    | MINUS FLOAT
     | STRING
     | BOOL
     | VARNAME
