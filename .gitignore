@@ -1,1 +1,9 @@
 .DS_Store
+
+# Antlr files
+*.interp
+*.tokens
+*.java
+*Lexer*
+*Listener*
+*Parser*
