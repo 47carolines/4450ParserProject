@@ -1,10 +1,9 @@
 grammar python;
 
 // TOKENS
-INT : 'int';
-FLOAT : 'float';
-BOOL : 'bool';
-STRING : 'str';
+INT : '0'..'9'+;
+BOOL : 'true' | 'false';
+STRING : '"' (~["\r\n] | '""')* '"';
 
 PLUS : '+';
 PLUSEQUAL : '+=';
@@ -20,6 +19,8 @@ EXPONENT : '**';
 EXPONENTEQUAL : '**=';
 FLOORDIV : '//';
 FLOORDIVEQUAL : '//=';
+EQUAL : '=';
+NEWLINE: [\n]+ ;
 
 SPACE : ' ';
 TAB : '    ';
@@ -31,28 +32,31 @@ VARNAME: [a-zA-Z_] [a-zA-Z_0-9]*;
 start: block EOF;
 
 block
-    : expr block*
+    : assignment block*
+    | expr block*
+    | NEWLINE
     ;
 
 space
     : SPACE
-    | TAB
+    | TAB // rule also covers multiple spaces or tabs.
     | space space
     ;
 
 expr
-     :
-     | //being worked on 
+     : var
      ;
 
+assignment
+    : VARNAME EQUAL expr
+    | VARNAME space EQUAL expr
+    | VARNAME space EQUAL space expr
+    | VARNAME EQUAL space expr
+    ;
+
+
 var : INT
-    | MINUS INT
-    | intCast
-    | FLOAT
-    | MINUS FLOAT
-    | floatCast
     | STRING
-    | strCast
     | BOOL
     | VARNAME
     ;
