@@ -11,7 +11,7 @@ This project is an implementation of a parser for a simplified version of the Py
 **Programming Language:** Python
 
 **Group Members (and GitHub usernames):**
-*	Troy Dalton (ttdghk)
+*	Troy Dalton (ttdghk/ShadowDeath6)
 *	Evan Dobson (nosbod18)
 *	Caroline Lewis (47carolines)
 *	Jacob Strubelt (Jakey5197)
