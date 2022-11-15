@@ -1,13 +1,17 @@
 grammar python;
 
-start: (expr NEWLINE)* ;
-
 // TOKENS
+
+//variables
 INT : 'int';
 FLOAT : 'float';
 BOOL : 'bool';
 STRING : 'str';
+STRING : '"' (~["\r\n] | '""')* '"';
 
+VARNAME: [a-zA-Z_] [a-zA-Z_0-9]*;
+
+//arithmetic operators
 PLUS : '+';
 PLUSEQUAL : '+=';
 MINUS : '-';
@@ -22,31 +26,43 @@ EXPONENT : '**';
 EXPONENTEQUAL : '**=';
 FLOORDIV : '//';
 FLOORDIVEQUAL : '//=';
+EQUAL : '=';
 
-VARNAME: [a-zA-Z_] [a-zA-Z_0-9]*;
-
+//conditional operators
+GREATERTHAN : '>';
+GREATERTHANEQUAL : '>=';
+LESSTHAN : '<';
+LESSTHANEQUAL : '<=';
+AREEQUAL : '==';
+NOTEQUAL : '!=';
+NOT : 'not';
+AND : 'and';
+OR : 'or';
 
 // RULES
 var : INT
     | MINUS INT
-    | intCast
     | FLOAT
     | MINUS FLOAT
-    | floatCast
     | STRING
-    | strCast
     | BOOL
     | VARNAME
     ;
 
-expr : expr ('*' | '/') expr
-     | expr ('+' | '-') expr
-     | INT
-     | '(' expr ')'
-     | printRule
-     ;
+expression : mathExpr
+           | conditionalExpr
+           | var
+           ;
 
-printRule: 'print(' expr ')';
-
-NEWLINE: [\n]+ ;
-INT    : [0-9]+ ;
+conditionalExpr : operator=(GREATERTHAN | GREATERTHANEQUAL) var
+                | whitespace operator=(GREATERTHAN | GREATERTHANEQUAL) var
+                | whitespace operator=(GREATERTHAN | GREATERTHANEQUAL) whitespace var
+                | operator=(LESSTHAN | LESSTHANEQUAL) var
+                | whitespace operator=(LESSTHAN | LESSTHANEQUAL) var
+                | whitespace operator=(LESSTHAN | LESSTHANEQUAL) whitespace var
+                | operator=(AREEQUAL | NOTEQUAL) var
+                | whitespace operator=(AREEQUAL | NOTEQUAL) var
+                | whitespace operator=(AREEQUAL | NOTEQUAL) whitespace var
+                | operator=(NOT | AND | OR) var
+                | whitespace operator=(NOT | AND | OR) var
+                | whitespace operator=(NOT | AND | OR) whitespace var
