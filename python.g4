@@ -25,11 +25,6 @@ EXPONENTEQUAL : '**=';
 FLOORDIV : '//';
 FLOORDIVEQUAL : '//=';
 EQUAL : '=';
-NEWLINE: [\n]+ ;
-
-SPACE : ' ';
-TAB : '    ';
-
 
 //conditional operators
 GREATERTHAN : '>';
@@ -42,19 +37,15 @@ NOT : 'not';
 AND : 'and';
 OR : 'or';
 
+WHITESPACE : [ \r\n\t]+ -> skip;
+
 // RULES
 start: block EOF;
 
 block
     : assignment block*
     | expr block*
-    | NEWLINE
-    ;
-
-space
-    : SPACE
-    | TAB // rule also covers multiple spaces or tabs.
-    | space space
+    | WHITESPACE
     ;
 
 expr
@@ -64,28 +55,24 @@ expr
 
 assignment
     : VARNAME EQUAL expr
-    | VARNAME space EQUAL expr
-    | VARNAME space EQUAL space expr
-    | VARNAME EQUAL space expr
     ;
 
-
-var : INT
+var
+    : INT
     | STRING
     | BOOL
     | VARNAME
     ;
 
-conditionalExpr : operator=(GREATERTHAN | GREATERTHANEQUAL) var
-                | space operator=(GREATERTHAN | GREATERTHANEQUAL) var
-                | space operator=(GREATERTHAN | GREATERTHANEQUAL) space var
-                | operator=(LESSTHAN | LESSTHANEQUAL) var
-                | space operator=(LESSTHAN | LESSTHANEQUAL) var
-                | space operator=(LESSTHAN | LESSTHANEQUAL) space var
-                | operator=(AREEQUAL | NOTEQUAL) var
-                | space operator=(AREEQUAL | NOTEQUAL) var
-                | space operator=(AREEQUAL | NOTEQUAL) space var
-                | operator=(NOT | AND | OR) var
-                | space operator=(NOT | AND | OR) var
-                | space operator=(NOT | AND | OR) space var
-                ;
+conditionalExpr
+    : (GREATERTHAN
+        | GREATERTHANEQUAL
+        | LESSTHAN
+        | LESSTHANEQUAL
+        | AREEQUAL
+        | NOTEQUAL
+        | NOT
+        | AND
+        | OR) var
+    ;
+
