@@ -36,8 +36,14 @@ NOTEQUAL : '!=';
 NOT : 'not';
 AND : 'and';
 OR : 'or';
+//IF : 'if';
+//ELSE : 'else';
+
+RESERVED_WORD : 'if' | 'else' ;
 
 WHITESPACE : [ \r\n\t]+ -> skip;
+
+COLON : ':' ;
 
 // RULES
 start: block EOF;
@@ -52,6 +58,8 @@ expr
      : var
      | conditionalExpr
      | mathExpr
+     | if_block
+     | printRule
      ;
 
 assignment
@@ -81,5 +89,23 @@ conditionalExpr
         | NOT
         | AND
         | OR) var
+    | var (GREATERTHAN
+        | GREATERTHANEQUAL
+        | LESSTHAN
+        | LESSTHANEQUAL
+        | AREEQUAL
+        | NOTEQUAL
+        | NOT
+        | AND
+        | OR) var
     ;
 
+if_statement : 'if' expr WHITESPACE COLON WHITESPACE expr ;
+
+else_statement : 'else' COLON WHITESPACE expr ;
+
+if_block : if_statement WHITESPACE else_statement
+         | if_statement
+         ;
+
+printRule : 'print(' expr ')' ;
