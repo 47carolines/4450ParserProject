@@ -4,7 +4,7 @@ grammar python;
 
 //variables
 INT : '0'..'9'+;
-BOOL : 'true' | 'false';
+BOOL : 'True' | 'False';
 STRING : '"' (~["\r\n] | '""')* '"';
 
 VARNAME: [a-zA-Z_] [a-zA-Z_0-9]*;
@@ -36,10 +36,9 @@ NOTEQUAL : '!=';
 NOT : 'not';
 AND : 'and';
 OR : 'or';
-//IF : 'if';
-//ELSE : 'else';
-
-RESERVED_WORD : 'if' | 'else' ;
+RESERVED_WORD : 'if' | 'else' | 'elif' | 'print';
+OPEN: '(';
+CLOSE: ')';
 
 WHITESPACE : [ \r\n\t]+ -> skip;
 
@@ -100,12 +99,18 @@ conditionalExpr
         | OR) var
     ;
 
-if_statement : 'if' expr WHITESPACE COLON WHITESPACE expr ;
+if_statement 
+    : 'if' OPEN expr CLOSE COLON expr 
+    | 'if' expr COLON expr 
+    ;
 
-else_statement : 'else' COLON WHITESPACE expr ;
+elif_statement 
+    : 'elif' OPEN expr CLOSE COLON expr 
+    | 'elif' expr COLON expr 
+    ;
 
-if_block : if_statement WHITESPACE else_statement
-         | if_statement
-         ;
+else_statement : 'else' COLON expr ;
 
-printRule : 'print(' expr ')' ;
+if_block : if_statement elif_statement* else_statement*;
+
+printRule : 'print' OPEN expr CLOSE ;
