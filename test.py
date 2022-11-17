@@ -1,5 +1,4 @@
-2 <= 5
-1+1
-x = 1
-x+= 1
-x%= 1
+if 2<=5 :
+    print("works")
+else : 
+    print("breaks")
