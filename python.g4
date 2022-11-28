@@ -36,7 +36,7 @@ NOTEQUAL : '!=';
 NOT : 'not';
 AND : 'and';
 OR : 'or';
-RESERVED_WORD : 'if' | 'else' | 'elif' | 'print';
+RESERVED_WORD : 'if' | 'else' | 'elif' | 'print' | 'while' | 'for';
 OPEN: '(';
 CLOSE: ')';
 
@@ -59,6 +59,7 @@ expr
      | mathExpr
      | if_block
      | printRule
+     | while_statement
      ;
 
 assignment
@@ -114,3 +115,7 @@ else_statement : 'else' COLON expr ;
 if_block : if_statement elif_statement* else_statement*;
 
 printRule : 'print' OPEN expr CLOSE ;
+
+while_statement : 'while' OPEN expr CLOSE COLON expr*
+                | 'while' expr COLON expr*
+                ;
