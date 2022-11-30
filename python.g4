@@ -60,6 +60,7 @@ expr
      | if_block
      | printRule
      | while_statement
+     | for_block
      ;
 
 assignment
@@ -89,7 +90,7 @@ conditionalExpr
         | NOT
         | AND
         | OR) var
-    | var (GREATERTHAN
+        | var (GREATERTHAN
         | GREATERTHANEQUAL
         | LESSTHAN
         | LESSTHANEQUAL
@@ -119,3 +120,11 @@ printRule : 'print' OPEN expr CLOSE ;
 while_statement : 'while' OPEN expr CLOSE COLON expr*
                 | 'while' expr COLON expr*
                 ;
+
+for_statement
+    : 'for' var 'in' expr COLON ;
+
+for_block
+    : for_statement block
+    | for_statement block else_statement
+    ;
