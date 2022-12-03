@@ -44,6 +44,8 @@ WHITESPACE : [ \r\n\t]+ -> skip;
 
 COLON : ':' ;
 
+COMMENT: '#' ~( '\r' | '\n' )*;
+
 // RULES
 start: block EOF;
 
@@ -51,6 +53,7 @@ block
     : assignment block*
     | expr block*
     | WHITESPACE
+    | COMMENT
     ;
 
 expr
