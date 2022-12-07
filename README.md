@@ -35,8 +35,9 @@ This project is an implementation of a parser for a simplified version of the Py
      * NOTE: You can replace the <code>test.py</code> part of the command with the pathname of any Python file you want to test. 
 
 ## Bonus
-For the bonus, follow the same steps in the section above but run the following command instead of <code>python main.py test.py</code>: <br><code>antlr4 -o . -lib . -no-listener -no-visitor  python.g4; javac *.java; grun python start -gui test.py</code> 
-<br>This will generate an image visualization of the parse tree instead of a textual output that can be downloaded in PNG or SVG format. This is using ANTLR's GUI feature. You must have ANTLR4 correctly installed in order for this command to work.
+1. Open up a terminal/command prompt in the project folder <code>4450ParserProject</code>.
+2. Run <code>antlr4 -o . -lib . -no-listener -no-visitor  python.g4; javac *.java; grun python start -gui test.py</code>. 
+     * This will create the parser and  generate an image visualization of the parse tree for <code>test.py</code> that can be downloaded in PNG or SVG format. This is using ANTLR's GUI feature. You must have ANTLR4 correctly installed in order for this command to work.
 <br><br>
 
 ## Demo video
