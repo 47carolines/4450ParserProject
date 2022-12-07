@@ -47,7 +47,7 @@ COLON : ':' ;
 COMMENT: '#' ~( '\r' | '\n' )*;
 
 // RULES
-start: block EOF;
+start: block EOF; //start symbol
 
 block
     : assignment block*
