@@ -64,6 +64,7 @@ expr
      | printRule
      | while_statement
      | for_block
+     | func_call
      ;
 
 assignment
@@ -130,4 +131,8 @@ for_statement
 for_block
     : for_statement block
     | for_statement block else_statement
+    ;
+
+func_call
+    : func_name '(' parameter? ')'
     ;
