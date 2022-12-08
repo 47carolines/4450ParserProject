@@ -23,7 +23,7 @@ This project is an implementation of a parser for a simplified version of the Py
 2. If you don't already have Python, download and install it: https://www.python.org/downloads/.
 3. If you don't already have ANTLR4, download and install it using the instructions provided in the file located in this repo called ANTLR.pdf.
 4. Open up a terminal/command prompt in the project folder <code>4450ParserProject</code>.
-5. Run <code>pip install -r requirements.txt</code> to install the <code>antlr4-python3-runtime</code>. This is needed for <code>main.py</code> to work.
+5. Run <code>pip install -r requirements.txt</code> to install the <code>antlr4-python3-runtime</code> and <code>antlr-denter</code>. This is needed for <code>main.py</code> to work.
 <br><br>
 
 
