@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project is an implementation of a parser for a simplified version of the Python language (specifically Python 3.x). To create our parser we used a tool called ANTLR which can generate parsers from a grammar file. Our grammar <code>python.g4</code> covers the basics of the Python language but does not cover more complex things like classes and functions. The output of this project is a parse tree. 
+This project is an implementation of a parser for a simplified version of the Python language (specifically Python 3.x). To create our parser we used a tool called ANTLR which can generate parsers from a grammar file. Our grammar <code>python.g4</code> covers the basics of the Python language (if/elif/else statements, while/for loops, commenting), as well as functions and function calls. The output of this project is a parse tree. 
 
 ## Group Information
 
