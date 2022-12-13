@@ -118,10 +118,10 @@ arith_expr
 // Atoms and operators
 
 atom
-    : NOT? (ID | NUMBER | STRING | bool)
+    : NOT? (ID | NUMBER | STRING | bool_)
     ;
 
-bool
+bool_
     : TRUE
     | FALSE
     ;
