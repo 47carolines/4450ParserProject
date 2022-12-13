@@ -82,6 +82,7 @@ for_stmt
 
 while_stmt
     : WHILE expr COLON block
+    | WHILE OPEN_PAREN expr CLOSE_PAREN COLON block
     ;
 
 //////////////////////////////////////
